@@ -1,0 +1,12 @@
+.task {
+  display: flex;
+  width: 90%;
+  height: 95px;
+  margin: 2px auto;
+  gap: 1px;
+  background-color: #fefefe;
+}
+
+.task > input[type="radio"] {
+  width: 42px;
+}

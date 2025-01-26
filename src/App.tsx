@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { TaskDTO } from "./models/dto";
+import Task from "./components/task/Taask";
+
+const testData: TaskDTO[] = [
+  { id: 1, text: "Hello", isCompleted: true },
+  { id: 2, text: "World", isCompleted: false },
+  { id: 3, text: "Bye", isCompleted: false },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTask] = useState([]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="todo">
+      <h1>todos</h1>
+      <input type="text" placeholder=" v Whats needs to be dane ?" />
+      {testData.map((task) => (
+        <Task data={task} />
+      ))}
+      <div className="todo_controls">
+        <p>n items left</p>
+        <div>
+          <button>all</button>
+          <button>Active</button>
+          <button>Completed</button>
+        </div>
+        <button>clear tasks</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
