@@ -12,6 +12,8 @@
 
 .todo {
   background-color: #f5f5f5;
+  box-sizing: border-box;
+  color: #acacac;
 }
 
 .todo > input {
@@ -20,12 +22,44 @@
   background-color: #fefefe;
   border: none;
   margin-bottom: 2px;
+  padding: 0 10px;
+}
+
+.todo > input::placeholder {
+  font-size: 36px;
+  color: #acacac;
+  opacity: 0.2;
+  text-align: left;
+  vertical-align: baseline;
 }
 
 .todo_controls {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 90%;
   margin: 0 auto;
+  padding: 0 10px;
   background-color: #fefefe;
+}
+
+.todo_filters {
+  display: flex;
+  gap: 15px;
+
+  button {
+    background-color: #fefefe;
+    border: 1px solid gray;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+}
+
+.todo_clear {
+  background-color: #fefefe;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.todo_clear:hover {
+  border: 1px solid gray;
 }

@@ -7,7 +7,7 @@ type Props = { data: TaskDTO };
 
 export default function Task({ data }: Props) {
   return (
-    <div className="task" key={data.id}>
+    <div className="task">
       <div className="task_checkbox">
         <div className="task_checkbox_border"></div>
         <img className="task_checkbox_check" src={check} alt="" />

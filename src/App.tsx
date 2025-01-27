@@ -15,18 +15,18 @@ function App() {
   return (
     <div className="todo">
       <h1>todos</h1>
-      <input type="text" placeholder=" v Whats needs to be dane ?" />
+      <input type="text" placeholder={"v  Whats needs to be done ?"} />
       {testData.map((task) => (
-        <Task data={task} />
+        <Task key={task.id} data={task} />
       ))}
       <div className="todo_controls">
         <p>n items left</p>
-        <div>
+        <div className="todo_filters">
           <button>all</button>
           <button>Active</button>
           <button>Completed</button>
         </div>
-        <button>clear tasks</button>
+        <button className="todo_clear">clear completed</button>
       </div>
     </div>
   );
