@@ -1,35 +1,74 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { addTask, clearCompleted } from "./redux/MainSlice";
 import "./App.css";
+import Task from "./components/task/Task";
+import { useAppDispatch, useAppSelector } from "./models/hooks";
 import { TaskDTO } from "./models/dto";
-import Task from "./components/task/Taask";
-
-const testData: TaskDTO[] = [
-  { id: 1, text: "Hello", isCompleted: true },
-  { id: 2, text: "World", isCompleted: false },
-  { id: 3, text: "Bye", isCompleted: false },
-];
 
 function App() {
-  const [tasks, setTask] = useState([]);
+  const tasksState = useAppSelector((state) => state.tasks);
+  const dispatch = useAppDispatch();
+  const [tasks, setTask] = useState<TaskDTO[] | null>();
+  const [filter, setFilter] = useState<number>(0);
+  useEffect(() => setTask(tasksState), [tasksState]);
 
   return (
     <div className="todo">
       <h1>todos</h1>
-      <input type="text" placeholder={"v  Whats needs to be done ?"} />
-      {testData.map((task) => (
-        <Task key={task.id} data={task} />
-      ))}
+      <input
+        onKeyUp={inputSubmit}
+        type="text"
+        placeholder={"v  Whats needs to be done ?"}
+      />
+      <div className="todo_tasks">
+        {filterTasks(tasks ? tasks : [])?.map((task) => (
+          <Task key={task.id + task.text} data={task} />
+        ))}
+      </div>
       <div className="todo_controls">
-        <p>n items left</p>
+        {tasks ? <p> {countTasks(tasks) + " items left"} </p> : null}
         <div className="todo_filters">
-          <button>all</button>
-          <button>Active</button>
-          <button>Completed</button>
+          <button onClick={() => setFilter(0)}>all</button>
+          <button onClick={() => setFilter(1)}>Active</button>
+          <button onClick={() => setFilter(2)}>Completed</button>
         </div>
-        <button className="todo_clear">clear completed</button>
+        <button
+          onClick={() => dispatch(clearCompleted())}
+          className="todo_clear"
+        >
+          clear completed
+        </button>
       </div>
     </div>
   );
-}
 
+  function inputSubmit(e: React.KeyboardEvent<HTMLInputElement>) {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      if (tasks) {
+        dispatch(
+          addTask({
+            id: tasks.length + 1,
+            text: e.currentTarget.value,
+            isCompleted: false,
+          })
+        );
+      }
+      e.currentTarget.value = "";
+    }
+  }
+
+  function countTasks(tasks: TaskDTO[] | null) {
+    if (!tasks) return 0;
+    return tasks.filter((task) => task.isCompleted === false).length;
+  }
+
+  function filterTasks(tasks: TaskDTO[] | null) {
+    if (!tasks || !filter) return tasks;
+    if (filter === 1) {
+      return tasks.filter((task) => task.isCompleted === false);
+    }
+    return tasks.filter((task) => task.isCompleted === true);
+  }
+}
 export default App;

@@ -13,7 +13,7 @@
 .todo {
   background-color: #f5f5f5;
   box-sizing: border-box;
-  color: #acacac;
+  color: black;
 }
 
 .todo > input {
@@ -23,6 +23,7 @@
   border: none;
   margin-bottom: 2px;
   padding: 0 10px;
+  color: black;
 }
 
 .todo > input::placeholder {
@@ -41,6 +42,7 @@
   margin: 0 auto;
   padding: 0 10px;
   background-color: #fefefe;
+  color: rgb(172, 172, 172);
 }
 
 .todo_filters {
@@ -49,10 +51,13 @@
 
   button {
     background-color: #fefefe;
-    border: 1px solid gray;
     padding: 5px 10px;
     cursor: pointer;
   }
+}
+
+.todo_filters:focus {
+  border: 1px solid gray;
 }
 
 .todo_clear {
@@ -62,4 +67,8 @@
 }
 .todo_clear:hover {
   border: 1px solid gray;
+}
+
+.todo_tasks {
+  min-height: 300px;
 }
