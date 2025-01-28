@@ -16,11 +16,12 @@ function App() {
     <div className="todo">
       <h1>todos</h1>
       <input
+        data-testid="todo_input"
         onKeyUp={inputSubmit}
         type="text"
         placeholder={"v  Whats needs to be done ?"}
       />
-      <div className="todo_tasks">
+      <div data-testid="todo_tasks" className="todo_tasks">
         {filterTasks(tasks ? tasks : [])?.map((task) => (
           <Task key={task.id + task.text} data={task} />
         ))}
@@ -28,11 +29,18 @@ function App() {
       <div className="todo_controls">
         {tasks ? <p> {countTasks(tasks) + " items left"} </p> : null}
         <div className="todo_filters">
-          <button onClick={() => setFilter(0)}>all</button>
-          <button onClick={() => setFilter(1)}>Active</button>
-          <button onClick={() => setFilter(2)}>Completed</button>
+          <button data-testid="filter_all" onClick={() => setFilter(0)}>
+            all
+          </button>
+          <button data-testid="filter_active" onClick={() => setFilter(1)}>
+            Active
+          </button>
+          <button data-testid="filter_completed" onClick={() => setFilter(2)}>
+            Completed
+          </button>
         </div>
         <button
+          data-testid="todo_clear_button"
           onClick={() => dispatch(clearCompleted())}
           className="todo_clear"
         >

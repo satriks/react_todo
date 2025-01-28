@@ -12,11 +12,20 @@ export default function Task({ data }: Props) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="task">
-      <div onClick={changeStatus} className="task_checkbox">
+    <div className="task" data-testid="task">
+      <div
+        data-testid="task_checkbox"
+        onClick={changeStatus}
+        className="task_checkbox"
+      >
         <div className="task_checkbox_border"></div>
         {data.isCompleted ? (
-          <img className="task_checkbox_check" src={check} alt="" />
+          <img
+            data-testid="completed"
+            className="task_checkbox_check"
+            src={check}
+            alt=""
+          />
         ) : null}
       </div>
       <p>{data.text}</p>
